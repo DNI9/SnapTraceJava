@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17"
+            fx:controller="com.snaptrace.controller.DashboardController"
+            prefWidth="900" prefHeight="600">
+    
+    <!-- Top Toolbar -->
+    <top>
+        <ToolBar>
+            <Button fx:id="newSessionButton" text="New Session" onAction="#handleNewSession"/>
+            <Separator orientation="VERTICAL"/>
+            <Button fx:id="exportButton" text="Export to Word" onAction="#handleExport" disable="true"/>
+            <Button fx:id="deleteSessionButton" text="Delete Session" onAction="#handleDeleteSession" disable="true"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label text="SnapTrace v1.0.0" style="-fx-text-fill: #999;"/>
+        </ToolBar>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <SplitPane dividerPositions="0.3">
+            <!-- Left: Session List -->
+            <VBox spacing="5">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                <Label text="Sessions" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <ListView fx:id="sessionListView" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            
+            <!-- Right: Evidence Grid -->
+            <VBox spacing="10">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                
+                <!-- Session Header -->
+                <VBox spacing="2">
+                    <Label fx:id="sessionTitleLabel" text="Select a Session" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <Label fx:id="sessionInfoLabel" text="" 
+                           style="-fx-font-size: 11px; -fx-text-fill: #666;"/>
+                </VBox>
+                
+                <Separator/>
+                
+                <!-- Evidence Thumbnails -->
+                <ScrollPane fx:id="evidenceScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS">
+                    <FlowPane fx:id="evidenceGrid" hgap="10" vgap="10" 
+                              style="-fx-padding: 10;">
+                    </FlowPane>
+                </ScrollPane>
+            </VBox>
+        </SplitPane>
+    </center>
+    
+    <!-- Bottom Status Bar -->
+    <bottom>
+        <HBox style="-fx-background-color: #f0f0f0; -fx-padding: 5 10;">
+            <Label text="Alt+Shift+S: Capture | Alt+Shift+D: Show Dashboard | Esc: Discard | Ctrl+Enter: Save"/>
+        </HBox>
+    </bottom>
+    
+</BorderPane>
